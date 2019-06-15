@@ -1,5 +1,5 @@
 <?php
-  require 'database.php';
+  require 'includes/database.php';
 
 if( isset($_GET['id']) &&  is_numeric($_GET['id'])){
     $sql = "SELECT *
@@ -20,21 +20,8 @@ if( isset($_GET['id']) &&  is_numeric($_GET['id'])){
 
 
 ?>
-<!DOCTYPE html>
-<html>
+<?php require 'includes/header.php'; ?>
 
-<head>
-    <title>My blog</title>
-    <meta charset="utf-8">
-</head>
-
-<body>
-
-    <header>
-        <h1>My blog</h1>
-    </header>
-
-    <main>
         <?php if ($article === null): ?>
         <p>Article not found.</p>
         <?php else: ?>
@@ -45,7 +32,5 @@ if( isset($_GET['id']) &&  is_numeric($_GET['id'])){
         </article>
 
         <?php endif; ?>
-    </main>
-</body>
 
-</html>
+<?php require 'includes/footer.php'; ?>

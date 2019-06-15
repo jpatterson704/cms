@@ -1,6 +1,6 @@
 <?php
 
-    require 'database.php';
+    require 'includes/database.php';
 
     $sql = "SELECT *
             FROM article
@@ -15,10 +15,10 @@
     }
 
 ?>
-<?php require 'header.php'; ?>
+<?php require 'includes/header.php'; ?>
 
     <?php if (empty($articles)): ?>
-    <p>No articles found.</p>
+        <p>No articles found.</p>
     <?php else: ?>
 
     <ul>
@@ -34,4 +34,4 @@
 
     <?php endif; ?>
 
-<?php require 'footer.php'; ?>
+<?php require 'includes/footer.php'; ?>
