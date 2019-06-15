@@ -14,14 +14,14 @@ if (mysqli_connect_error()) {
 
 $sql = "SELECT *
         FROM article
-        WHERE id=2;";
+        ORDER BY published_at;";
 
 $results = mysqli_query($conn, $sql);
 
 if ($results === false) {
     echo mysqli_error($conn);
 } else {
-    $article = mysqli_fetch_assoc($results);
+    $articles = mysqli_fetch_all($results, MYSQLI_ASSOC);
 }
 
 ?>
@@ -38,17 +38,19 @@ if ($results === false) {
     </header>
 
     <main>
-        <?php if ($article === null): ?>
-            <p>Article not found.</p>
+        <?php if (empty($articles)): ?>
+            <p>No articles found.</p>
         <?php else: ?>
 
             <ul>
-  
-                <article>
-                    <h2><?= $article['title']; ?></h2>
-                    <p><?= $article['content']; ?></p>
-                </article>
-
+                <?php foreach ($articles as $article): ?>
+                    <li>
+                        <article>
+                            <h2><?= $article['title']; ?></h2>
+                            <p><?= $article['content']; ?></p>
+                        </article>
+                    </li>
+                <?php endforeach; ?>
             </ul>
 
         <?php endif; ?>
