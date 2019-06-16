@@ -1,37 +1,41 @@
 <?php
 
-    require 'includes/database.php';
+require 'includes/database.php';
 
-    $sql = "SELECT *
-            FROM article
-            ORDER BY published_at;";
+$conn = getDB();
 
-    $results = mysqli_query($conn, $sql);
+$sql = "SELECT *
+        FROM article
+        ORDER BY published_at;";
 
-    if ($results === false) {
-        echo mysqli_error($conn);
-    } else {
-        $articles = mysqli_fetch_all($results, MYSQLI_ASSOC);
-    }
+$results = mysqli_query($conn, $sql);
+
+if ($results === false) {
+    echo mysqli_error($conn);
+} else {
+    $articles = mysqli_fetch_all($results, MYSQLI_ASSOC);
+}
 
 ?>
 <?php require 'includes/header.php'; ?>
 
-    <?php if (empty($articles)): ?>
-        <p>No articles found.</p>
-    <?php else: ?>
+<a href="new-article.php">New article</a>
+
+<?php if (empty($articles)): ?>
+    <p>No articles found.</p>
+<?php else: ?>
 
     <ul>
         <?php foreach ($articles as $article): ?>
-        <li>
-            <article>
-                <h2> <a href="article.php?id=<?=$article['id']; ?>"> <?= $article['title']; ?></a></h2>
-                <p><?= $article['content']; ?></p>
-            </article>
-        </li>
+            <li>
+                <article>
+                    <h2><a href="article.php?id=<?= $article['id']; ?>"><?= htmlspecialchars($article['title']); ?></a></h2>
+                    <p><?= htmlspecialchars($article['content']); ?></p>
+                </article>
+            </li>
         <?php endforeach; ?>
     </ul>
 
-    <?php endif; ?>
+<?php endif; ?>
 
 <?php require 'includes/footer.php'; ?>
