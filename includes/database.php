@@ -3,7 +3,7 @@
 /**
  * Get the database connection
  *
- * @return object Connection to a MySQL server
+ * @return object Connection to the database server
  */
 function getDB()
 {
